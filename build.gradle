@@ -3,26 +3,23 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven{url "https://plugins.gradle.org/m2/"}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
-        classpath 'org.codehaus.groovy:groovy-all:2.4.15'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
-        classpath "gradle.plugin.com.vanniktech:gradle-android-javadoc-plugin:0.3.0"
+        classpath 'com.android.tools.build:gradle:9.2.1'
+        classpath 'org.apache.groovy:groovy-all:4.0.21'
     }
 }
 
 plugins {
-    id "org.sonarqube" version "2.6"
-    id "com.vanniktech.android.javadoc" version "0.3.0"
+    id "org.sonarqube" version "7.3.0.8198"
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven{url "https://plugins.gradle.org/m2/"}
     }
 }

@@ -265,21 +265,17 @@ public class GameActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.credit100:
+		int itemId = item.getItemId();
+		if (itemId == R.id.credit100) {
 			game.getPlayer().setWallet(100 + game.getPlayer().getWallet());
 			updateViews();
 			startActivity(new Intent(this, InnerBannerActivity.class));
-			break;
-		case R.id.update_player:
+		} else if (itemId == R.id.update_player) {
 			startActivity(new Intent(this, UpdatePlayerActivity.class));
-			break;
-		case R.id.help:
+		} else if (itemId == R.id.help) {
 			startActivity(new Intent(this, HelpActivity.class));
-			break;
-		case R.id.about:
+		} else if (itemId == R.id.about) {
 			startActivity(new Intent(this, AboutActivity.class));
-			break;
 		}
 		return true;
 	}

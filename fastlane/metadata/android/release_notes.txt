@@ -1,0 +1,5 @@
+Version 2.0.1
+• Improved game performance and stability
+• Enhanced user interface with better graphics
+• Bug fixes and optimizations
+• Updated help section with clearer instructions

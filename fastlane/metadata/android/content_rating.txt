@@ -1,0 +1,23 @@
+# Content rating for Google Play Store
+# Age-appropriate content descriptions
+
+violence_present = "false"
+violence_cartoon_fantasy = "false"
+violence_realistic = "false"
+violence_prolonged_graphic = "false"
+
+profanity_present = "false"
+profanity_mild = "false"
+profanity_strong = "false"
+
+sexual_nudity_present = "false"
+sexual_themes_present = "false"
+
+alcohol_tobacco_drugs_present = "false"
+alcohol_tobacco_drugs_mild = "false"
+alcohol_tobacco_drugs_strong = "false"
+
+gambling_present = "true"
+gambling_simulated = "true"
+
+other_mature_content = "false"

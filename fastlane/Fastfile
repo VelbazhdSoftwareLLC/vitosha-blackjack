@@ -1,0 +1,94 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  before_all do
+    setup_circle_ci if ENV['CI']
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Build a debug APK"
+  lane :debug do
+    gradle(
+      task: "assemble",
+      build_type: "debug"
+    )
+  end
+
+  desc "Build a release APK"
+  lane :release do
+    gradle(
+      task: "assemble",
+      build_type: "release"
+    )
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(
+      task: "bundle",
+      build_type: "release"
+    )
+    upload_to_play_store(
+      track: "internal",
+      aab: "../app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+
+  desc "Upload metadata to Google Play Console"
+  lane :upload_metadata do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+
+  desc "Download metadata from Google Play Console"
+  lane :download_metadata do
+    download_from_play_store(
+      package_name: "eu.veldsoft.vitosha.blackjack",
+      metadata_path: "fastlane/metadata/android"
+    )
+  end
+
+  desc "Increment version code"
+  lane :increment_version do
+    increment_version_code(
+      gradle_file_path: "VitoshaBlackjack/build.gradle"
+    )
+  end
+
+  desc "Clean build"
+  lane :clean do
+    gradle(task: "clean")
+  end
+
+  # Error handlers
+  error do |lane, exception|
+    UI.error("Lane #{lane} failed with exception: #{exception}")
+  end
+end
